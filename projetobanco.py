@@ -21,70 +21,63 @@ limite = 500.00
 vsaque = 0.00
 extrato = ""
 numero_saques = 0
-LIMITE_SAQUES = 3
 
 while True:
     opcao = input(menu)
 
     if opcao == "1":
-        print("")
-        print("------ Depósito ------")
-        print("")
+        print("\n--------------------------------------------------------")
+        print("Depósito:\n")
+
         valor = float(input("Insira o valor desejado: R$  "))
-        saldo += valor
-        print("")
-        print(f">> O seu saldo agora é R$ {saldo:.2f}")
-        print("")
-        extrato += (f"Depósito realizado no valor de R$ {valor:.2f}. \n")
+        
+        if valor > 0:
+            saldo += valor
+            print ("\n>> Operação realizado com sucesso.")
+            extrato += f"Depósito realizado: R$ {valor:.2f}. \n"
+        
+        else:
+            print("\n>> ERRO: Valor inválido.\n")
 
     elif opcao == "2":
-        print("")
-        print("------ Saque ------")
-        print("")
+        print("\n--------------------------------------------------------")
+        print("Saque:\n")
+
         if numero_saques >= 3:
-            print("")
-            print(">> Você excedeu o limite de saques diários!")
-            print("")
+            print("\n>> Você excedeu o limite de saques diários!")
+            
         else:
             vsaque = float(input("Insira o valor para saque: R$  "))
             if vsaque > limite:
-                print("")
-                print("--------------- ERRO ---------------")
-                print(">> Valor excede o limite autorizado.")
+                print("\n>> ERRO: Valor excede o limite autorizado.")
             elif vsaque > saldo:
-                print("")
-                print("-------- ERRO --------")
-                print(">> Saldo insuficiente.")
+                print("\n>> ERRO: Saldo insuficiente.")
+            elif vsaque <= 0:
+                print("\n>> ERRO: Valor inválido.")
             else:
                 saldo -= vsaque
-                print("")
-                print(">> Operação realizada com sucesso!")
-                print("")
-                print(f"O seu saldo agora é R$ {saldo:.2f}")
-                print("")
-                extrato += (f"Saque realizado no valor de R$ {vsaque:.2f}. \n")
-        numero_saques += 1
+                print("\n>> Operação realizada com sucesso.")
+                numero_saques += 1
+                extrato += (f"Saque realizado:    R$ {vsaque:.2f}. \n")      
         
     elif opcao == "3":
-        print("")
-        print("------ Extrato ------")
-        print("")
+        print("\n--------------------------------------------------------")
+        print("Extrato:\n")
+
         if extrato == (""):
-            print("")
-            print(">> Não foram realizadas movimentações.")
-            print ("")
+            print("\n>> Não foram realizadas movimentações.")
+            print(f">> Saldo: R$ {saldo:.2f}.")
 
         else:
             print(extrato)
+            print("\n                ***                          \n")
+            print (f">> Saldo: R$ {saldo:.2f}.")
 
     elif opcao == "4":
         break
 
     else:
-        print("")
-        print("Operação inválida, por favor selecione novamente a operação desejada.")
+        print("\nOperação inválida, por favor selecione novamente a operação desejada.")
 
-print ("")
-print("O banco SP agradece sua visita, volte sempre!")
-print("")
+print("\nO banco SP agradece sua visita, volte sempre!\n")
 print ("---------------------------------------")
